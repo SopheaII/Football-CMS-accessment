@@ -1,13 +1,17 @@
 import express from "express";
 import cors from "cors";
 import connectDB from "./config/db.js";
+
 import classRoute from "./routes/classRoute.js";
+import studentRouter from "./routes/studentRouter.js";
 import dotenv from "dotenv";
+
 
 // Initialize dotenv to load environment variables
 dotenv.config();
 
 const app = express();
+
 
 var corsOptions = {
   origin: "http://localhost:5173",
@@ -17,6 +21,7 @@ app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(express.json());
+
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -28,7 +33,7 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/class", classRoute);
-
+app.use("/api/student",studentRouter)
 //connectDB
 connectDB();
 
